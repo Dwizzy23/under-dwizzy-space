@@ -162,7 +162,7 @@
 <main>
   <section class="intro" id="intro">
     <h2>Twoja muzyka w kosmosie</h2>
-    <p>Przenieś się w inny wymiar dźwięku — słuchaj, odkrywaj i zanurz się w najlepszych trackach pod gwiazdami.</p>
+    <p>Przenieś się w inny wymiar dźwięku — słuchaj, odkrywaj, kolaboruj, mixuj, tworz bity i realizuj artystow, zanurz się w najlepszych trackach w underze.</p>
   </section>
 
   <section class="playlist" id="playlist">
@@ -187,84 +187,8 @@
 </main>
 
 <footer>
-  © 2025 Under Dwizzy Space &mdash; Wszystkie prawa zastrzeżone.
+  © 2025 Dwizzy Space &mdash; Wszystkie prawa zastrzeżone.
 </footer>
-
-<script>
-  const tracks = [
-    { title: "Track 1 - Kosmiczne Echo", src: "track1.mp3" },
-    { title: "Track 2 - Gwiezdna Podróż", src: "track2.mp3" },
-    { title: "Track 3 - Mgławica Dźwięków", src: "track3.mp3" }
-  ];
-
-  const trackListElem = document.getElementById('trackList');
-  let currentAudio = null;
-  let currentPlayingIndex = null;
-
-  function createTrackItem(track, index) {
-    const li = document.createElement('li');
-    li.textContent = track.title;
-
-    const btn = document.createElement('button');
-    btn.className = 'play-btn';
-    btn.innerHTML = '▶'; // play symbol
-
-    btn.addEventListener('click', e => {
-      e.stopPropagation();
-      playTrack(index);
-    });
-
-    li.appendChild(btn);
-
-    li.addEventListener('click', () => {
-      playTrack(index);
-    });
-
-    return li;
-  }
-
-  function playTrack(index) {
-    if(currentPlayingIndex === index) {
-      currentAudio.pause();
-      currentPlayingIndex = null;
-      updateUI();
-      return;
-    }
-
-    if(currentAudio) {
-      currentAudio.pause();
-    }
-
-    currentAudio = new Audio(tracks[index].src);
-    currentAudio.play();
-    currentPlayingIndex = index;
-
-    currentAudio.onended = () => {
-      currentPlayingIndex = null;
-      updateUI();
-    }
-
-    updateUI();
-  }
-
-  function updateUI() {
-    const items = trackListElem.children;
-    for(let i = 0; i < items.length; i++) {
-      if(i === currentPlayingIndex) {
-        items[i].classList.add('playing');
-        items[i].querySelector('button.play-btn').innerHTML = '❚❚'; // pause symbol
-      } else {
-        items[i].classList.remove('playing');
-        items[i].querySelector('button.play-btn').innerHTML = '▶'; // play symbol
-      }
-    }
-  }
-
-  tracks.forEach((track, i) => {
-    const item = createTrackItem(track, i);
-    trackListElem.appendChild(item);
-  });
-</script>
 
 </body>
 </html>
