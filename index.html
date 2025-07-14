@@ -12,7 +12,7 @@
   }
   body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #1e1f28, #121212);
+    background: linear-gradient(135deg, #0b3d0b, #052005); /* ciemnozielone tło */
     color: #eee;
     min-height: 100vh;
     display: flex;
@@ -20,9 +20,9 @@
     overflow-x: hidden;
   }
   header {
-    background: linear-gradient(90deg, #ff005c, #ff8a00);
+    background: linear-gradient(90deg, #00ff6a, #007f3f); /* gradient zielony */
     padding: 1.8rem 2rem;
-    box-shadow: 0 3px 10px rgb(255 138 0 / 0.5);
+    box-shadow: 0 3px 10px rgba(0, 255, 106, 0.5);
     text-align: center;
     position: sticky;
     top: 0;
@@ -53,22 +53,22 @@
     font-weight: 600;
     font-size: 2rem;
     margin-bottom: 1rem;
-    background: linear-gradient(90deg, #ff005c, #ff8a00);
+    background: linear-gradient(90deg, #00ff6a, #007f3f);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
   section.intro p {
     font-weight: 300;
     font-size: 1.2rem;
-    color: #ddd;
+    color: #cce5cc;
     max-width: 600px;
     margin: 0 auto;
   }
   section.playlist {
-    background: #22222a;
+    background: #123412; /* ciemniejszy zielony */
     padding: 2rem;
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgb(255 138 0 / 0.3);
+    box-shadow: 0 10px 30px rgba(0, 255, 106, 0.3);
     animation: fadeSlideIn 1.4s ease forwards;
     opacity: 0;
   }
@@ -76,14 +76,14 @@
     margin-bottom: 1.5rem;
     font-weight: 600;
     font-size: 1.8rem;
-    color: #ff8a00;
+    color: #00ff6a;
     user-select: none;
   }
   ul.track-list {
     list-style: none;
   }
   ul.track-list li {
-    background: #333344;
+    background: #234523;
     margin-bottom: 1rem;
     padding: 0.9rem 1rem;
     border-radius: 8px;
@@ -91,25 +91,25 @@
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease;
   }
   ul.track-list li:hover {
-    background: #ff5e62;
-    color: white;
+    background: #00ff6a;
+    color: #121212;
   }
   ul.track-list li.playing {
-    background: #ff8a00;
-    color: #121212;
+    background: #007f3f;
+    color: #cce5cc;
     font-weight: 700;
-    box-shadow: 0 0 8px #ff8a00;
+    box-shadow: 0 0 8px #00ff6a;
   }
   button.play-btn {
     background: none;
-    border: 2px solid #ff8a00;
+    border: 2px solid #00ff6a;
     border-radius: 50%;
     width: 32px;
     height: 32px;
-    color: #ff8a00;
+    color: #00ff6a;
     cursor: pointer;
     font-size: 1rem;
     transition: background 0.3s, color 0.3s;
@@ -118,15 +118,15 @@
     align-items: center;
   }
   button.play-btn:hover {
-    background: #ff8a00;
+    background: #00ff6a;
     color: #121212;
   }
   footer {
-    background: #121212;
+    background: #052005;
     padding: 1rem 2rem;
     text-align: center;
     font-size: 0.9rem;
-    color: #666;
+    color: #669966;
     user-select: none;
   }
 
@@ -170,6 +170,19 @@
     <ul class="track-list" id="trackList">
       <!-- Tracki pojawią się tutaj dynamicznie -->
     </ul>
+
+    <!-- Osadzona playlista Spotify -->
+    <div style="margin-top: 2rem; text-align: center;">
+      <iframe 
+        src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M" 
+        width="100%" 
+        height="380" 
+        frameborder="0" 
+        allowtransparency="true" 
+        allow="encrypted-media"
+        style="border-radius:12px;">
+      </iframe>
+    </div>
   </section>
 </main>
 
@@ -177,25 +190,12 @@
   © 2025 Under Dwizzy Space &mdash; Wszystkie prawa zastrzeżone.
 </footer>
 
-<section class="playlist" id="playlist">
-  <h3>Playlista</h3>
-  <ul class="track-list" id="trackList">
-    <!-- Tracki pojawią się tutaj dynamicznie -->
-  </ul>
-
-  <!-- Osadzona playlista Spotify -->
-  <div style="margin-top: 2rem; text-align: center;">
-    <iframe 
-      src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M" 
-      width="100%" 
-      height="380" 
-      frameborder="0" 
-      allowtransparency="true" 
-      allow="encrypted-media"
-      style="border-radius:12px;">
-    </iframe>
-  </div>
-</section>
+<script>
+  const tracks = [
+    { title: "Track 1 - Kosmiczne Echo", src: "track1.mp3" },
+    { title: "Track 2 - Gwiezdna Podróż", src: "track2.mp3" },
+    { title: "Track 3 - Mgławica Dźwięków", src: "track3.mp3" }
+  ];
 
   const trackListElem = document.getElementById('trackList');
   let currentAudio = null;
@@ -224,7 +224,6 @@
   }
 
   function playTrack(index) {
-    // Jeśli to samo kliknięto, pauzuj
     if(currentPlayingIndex === index) {
       currentAudio.pause();
       currentPlayingIndex = null;
@@ -232,12 +231,10 @@
       return;
     }
 
-    // Jeśli gra coś innego, zatrzymaj
     if(currentAudio) {
       currentAudio.pause();
     }
 
-    // Stwórz nowy obiekt audio i zagraj
     currentAudio = new Audio(tracks[index].src);
     currentAudio.play();
     currentPlayingIndex = index;
@@ -252,7 +249,7 @@
 
   function updateUI() {
     const items = trackListElem.children;
-    for(let i=0; i < items.length; i++) {
+    for(let i = 0; i < items.length; i++) {
       if(i === currentPlayingIndex) {
         items[i].classList.add('playing');
         items[i].querySelector('button.play-btn').innerHTML = '❚❚'; // pause symbol
@@ -263,7 +260,6 @@
     }
   }
 
-  // Inicjuj listę
   tracks.forEach((track, i) => {
     const item = createTrackItem(track, i);
     trackListElem.appendChild(item);
