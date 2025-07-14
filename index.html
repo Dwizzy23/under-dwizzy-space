@@ -1,22 +1,274 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8">
-  <title>UNDER PLAYLIST PL</title>
-  <style>
-    /* Prosty styling: czarne tło, białe przyciski */
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Under Dwizzy Space – Twoja Muzyka w Kosmosie</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+<style>
+  /* Reset */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1e1f28, #121212);
+    color: #eee;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+  header {
+    background: linear-gradient(90deg, #ff005c, #ff8a00);
+    padding: 1.8rem 2rem;
+    box-shadow: 0 3px 10px rgb(255 138 0 / 0.5);
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  header h1 {
+    font-weight: 600;
+    font-size: 2.4rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    color: #fff;
+    user-select: none;
+    text-shadow: 0 2px 6px rgba(255,255,255,0.2);
+  }
+  main {
+    flex: 1;
+    padding: 3rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  section.intro {
+    text-align: center;
+    margin-bottom: 3rem;
+    animation: fadeSlideIn 1s ease forwards;
+    opacity: 0;
+  }
+  section.intro h2 {
+    font-weight: 600;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, #ff005c, #ff8a00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  section.intro p {
+    font-weight: 300;
+    font-size: 1.2rem;
+    color: #ddd;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  section.playlist {
+    background: #22222a;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgb(255 138 0 / 0.3);
+    animation: fadeSlideIn 1.4s ease forwards;
+    opacity: 0;
+  }
+  section.playlist h3 {
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: #ff8a00;
+    user-select: none;
+  }
+  ul.track-list {
+    list-style: none;
+  }
+  ul.track-list li {
+    background: #333344;
+    margin-bottom: 1rem;
+    padding: 0.9rem 1rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  ul.track-list li:hover {
+    background: #ff5e62;
+    color: white;
+  }
+  ul.track-list li.playing {
+    background: #ff8a00;
+    color: #121212;
+    font-weight: 700;
+    box-shadow: 0 0 8px #ff8a00;
+  }
+  button.play-btn {
+    background: none;
+    border: 2px solid #ff8a00;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    color: #ff8a00;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s, color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  button.play-btn:hover {
+    background: #ff8a00;
+    color: #121212;
+  }
+  footer {
+    background: #121212;
+    padding: 1rem 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #666;
+    user-select: none;
+  }
+
+  /* Animations */
+  @keyframes fadeSlideIn {
+    0% {opacity: 0; transform: translateY(20px);}
+    100% {opacity: 1; transform: translateY(0);}
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    header h1 {
+      font-size: 1.8rem;
+    }
+    section.intro h2 {
+      font-size: 1.6rem;
+    }
+    section.playlist {
+      padding: 1.5rem;
+    }
+    ul.track-list li {
+      font-size: 0.95rem;
+    }
+  }
+</style>
 </head>
 <body>
-  <div class="cover">
-    <img src="cover.jpg" alt="Cover playlisty">
-    <h1>UNDER PLAYLIST PL</h1>
+
+<header>
+  <h1>Under Dwizzy Space</h1>
+</header>
+
+<main>
+  <section class="intro" id="intro">
+    <h2>Twoja muzyka w kosmosie</h2>
+    <p>Przenieś się w inny wymiar dźwięku — słuchaj, odkrywaj i zanurz się w najlepszych trackach pod gwiazdami.</p>
+  </section>
+
+  <section class="playlist" id="playlist">
+    <h3>Playlista</h3>
+    <ul class="track-list" id="trackList">
+      <!-- Tracki pojawią się tutaj dynamicznie -->
+    </ul>
+  </section>
+</main>
+
+<footer>
+  © 2025 Under Dwizzy Space &mdash; Wszystkie prawa zastrzeżone.
+</footer>
+
+<section class="playlist" id="playlist">
+  <h3>Playlista</h3>
+  <ul class="track-list" id="trackList">
+    <!-- Tracki pojawią się tutaj dynamicznie -->
+  </ul>
+
+  <!-- Osadzona playlista Spotify -->
+  <div style="margin-top: 2rem; text-align: center;">
+    <iframe 
+      src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M" 
+      width="100%" 
+      height="380" 
+      frameborder="0" 
+      allowtransparency="true" 
+      allow="encrypted-media"
+      style="border-radius:12px;">
+    </iframe>
   </div>
-  <div class="links">
-    <a href="SPOTIFY_LINK">Spotify</a>
-    <a href="APPLE_LINK">Apple Music</a>
-    <a href="TIDAL_LINK">Tidal</a>
-    <a href="YOUTUBE_LINK">YouTube Music</a>
-  </div>
+</section>
+
+  const trackListElem = document.getElementById('trackList');
+  let currentAudio = null;
+  let currentPlayingIndex = null;
+
+  function createTrackItem(track, index) {
+    const li = document.createElement('li');
+    li.textContent = track.title;
+
+    const btn = document.createElement('button');
+    btn.className = 'play-btn';
+    btn.innerHTML = '▶'; // play symbol
+
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      playTrack(index);
+    });
+
+    li.appendChild(btn);
+
+    li.addEventListener('click', () => {
+      playTrack(index);
+    });
+
+    return li;
+  }
+
+  function playTrack(index) {
+    // Jeśli to samo kliknięto, pauzuj
+    if(currentPlayingIndex === index) {
+      currentAudio.pause();
+      currentPlayingIndex = null;
+      updateUI();
+      return;
+    }
+
+    // Jeśli gra coś innego, zatrzymaj
+    if(currentAudio) {
+      currentAudio.pause();
+    }
+
+    // Stwórz nowy obiekt audio i zagraj
+    currentAudio = new Audio(tracks[index].src);
+    currentAudio.play();
+    currentPlayingIndex = index;
+
+    currentAudio.onended = () => {
+      currentPlayingIndex = null;
+      updateUI();
+    }
+
+    updateUI();
+  }
+
+  function updateUI() {
+    const items = trackListElem.children;
+    for(let i=0; i < items.length; i++) {
+      if(i === currentPlayingIndex) {
+        items[i].classList.add('playing');
+        items[i].querySelector('button.play-btn').innerHTML = '❚❚'; // pause symbol
+      } else {
+        items[i].classList.remove('playing');
+        items[i].querySelector('button.play-btn').innerHTML = '▶'; // play symbol
+      }
+    }
+  }
+
+  // Inicjuj listę
+  tracks.forEach((track, i) => {
+    const item = createTrackItem(track, i);
+    trackListElem.appendChild(item);
+  });
+</script>
+
 </body>
 </html>
